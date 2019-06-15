@@ -28,7 +28,7 @@ namespace PedidoCigarro.Controllers
                 {
                     MailMessage mailMessage = new MailMessage();
                     mailMessage.From = new MailAddress(sobre.Email, sobre.Nome);
-                    mailMessage.To.Add("brunosaragosa@gmail.com");
+                    mailMessage.To.Add("EMAIL");
                     mailMessage.Subject = "Tomate entregas: " + sobre.Assunto;
                     mailMessage.Body = String.Format("Nome: {1}\nEmail: {0}\nMensagem: {2}", sobre.Email.ToString(), sobre.Nome.ToString(), sobre.Mensagem);
                     //ViewBag.Email = mailMessage.ToString();
