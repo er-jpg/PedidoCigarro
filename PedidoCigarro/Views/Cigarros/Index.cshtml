@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PedidoCigarro.Models.Cigarro>
+
+@{
+    ViewBag.Title = "Lista de Cigarros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $(".d-table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+            $(".d-table-row").css("cursor", "pointer");
+        });
+    </script>
+}
+
+<h2>Todos os cigarros</h2>
+<hr />
+
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+
+<table class="table table-bordered text-center table-hover">
+    <thead class="thead-dark font-weight-normal">
+        <tr>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.NomeCigarro)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
+            <th scope="col" class="font-weight-normal">Funções</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="d-table-row" data-href="@Url.Action("Detalhes", "Cigarros", new { id = item.IdCigarro })">
+                <th scope="row" class="font-weight-normal">
+                    @Html.DisplayFor(modelItem => item.NomeCigarro)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa)
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="@Url.Action("Editar", "Cigarros", new { id = item.IdCigarro })" type="button" class="btn btn-secondary">Editar</a>
+                        <a href="@Url.Action("Deletar", "Cigarros", new { id = item.IdCigarro })" type="button" class="btn btn-danger">Deletar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @Html.ActionLink("Novo cigarro", "Criar", "Cigarro", new { @class = "btn btn-primary btn-lg btn-block" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Voltar", "Index", "Pedidos", "Pedidos", new { @class = "btn btn-secondary btn-lg btn-block" })
+        </div>
+    </div>
+
+</div>
+

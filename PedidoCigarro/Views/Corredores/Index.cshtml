@@ -1,0 +1,81 @@
+﻿@model IEnumerable<PedidoCigarro.Models.Corredor>
+
+@{
+    ViewBag.Title = "Lista de Corredores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $(".d-table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+            $(".d-table-row").css("cursor", "pointer");
+        });
+    </script>
+}
+
+<h2>Todos os Corredores</h2>
+<hr />
+
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+
+<table class="table table-bordered text-center table-hover">
+    <thead class="thead-dark font-weight-normal">
+        <tr>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.NomeCorredor)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Carro)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.QtdePedidos)
+            </th>
+            <th scope="col" class="font-weight-normal">Funções</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="d-table-row" data-href="@Url.Action("Detalhes", "Corredores", new { id = item.IdCorredor })">
+                <th scope="row" class="font-weight-normal">
+                    @Html.DisplayFor(modelItem => item.NomeCorredor)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdePedidos)
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="@Url.Action("Editar", "Corredores", new { id = item.IdCorredor })" type="button" class="btn btn-secondary">Editar</a>
+                        <a href="@Url.Action("Deletar", "Corredores", new { id = item.IdCorredor })" type="button" class="btn btn-danger">Deletar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @Html.ActionLink("Novo corredor", "Criar", "Corredor", new { @class = "btn btn-primary btn-lg btn-block" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Gráfico", "Grafico", "Corredor", new { @class = "btn btn-secondary btn-lg btn-block" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Voltar", "Index", "Pedidos", "Pedidos", new { @class = "btn btn-secondary btn-lg btn-block" })
+        </div>
+    </div>
+</div>
+

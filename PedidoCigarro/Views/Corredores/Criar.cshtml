@@ -1,0 +1,38 @@
+﻿@model PedidoCigarro.Models.Corredor
+
+@{
+    ViewBag.Title = "Criar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criar</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeCorredor, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.NomeCorredor, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome do Corredor" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Carro, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.Carro, new { htmlAttributes = new { @class = "form-control", placeholder = "Carro" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.QtdePedidos)
+        @Html.EditorFor(model => model.QtdePedidos, new { htmlAttributes = new { @class = "form-control", placeholder = "Quantidade de Pedidos" } })
+    </div>
+
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <input type="submit" value="Adicionar Corredor" class="btn btn-success btn-lg btn-block" />
+            </div>
+            <div class="col">
+                @Html.ActionLink("Voltar", "Index", "Corredor", new { @class = "btn btn-secondary btn-lg btn-block" })
+            </div>
+        </div>
+    </div>
+}

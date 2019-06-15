@@ -1,0 +1,97 @@
+﻿@model IEnumerable<PedidoCigarro.Models.Pedido>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lista de pedidos";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $(".d-table-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+            $(".d-table-row").css("cursor", "pointer");
+        });
+    </script>
+}
+
+<h2>Todos os Pedidos</h2>
+<hr />
+
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+
+<table class="table table-bordered text-center table-hover">
+    <thead class="thead-dark font-weight-normal">
+        <tr>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.NomePedido)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Cigarro)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Corredor)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Pago)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th scope="col" class="font-weight-normal">
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th scope="col" class="font-weight-normal">Funções</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr class="d-table-row" data-href="@Url.Action("Detalhes", "Pedidos", new { id = item.IdPedido })">
+            <th scope="row" class="font-weight-normal">
+                @Html.DisplayFor(modelItem => item.NomePedido)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cigarro.NomeCigarro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Corredor.NomeCorredor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pago)
+            </td>
+            <td>
+                @Convert.ToDateTime(item.Data).ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Total)*@
+                @String.Format("{0:C}", Convert.ToDecimal(item.Total))
+            </td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a href="@Url.Action("Editar", "Pedidos", new { id = item.IdPedido })" type="button" class="btn btn-secondary">Editar</a>
+                    <a href="@Url.Action("Deletar", "Pedidos", new { id = item.IdPedido })" type="button" class="btn btn-danger">Deletar</a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @Html.ActionLink("Novo pedido", "Criar", "Pedidos", new { @class = "btn btn-primary btn-lg btn-block" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Sobre", "Index", "Sobre", "Sobre", new { @class = "btn btn-secondary btn-lg btn-block" })
+        </div>
+    </div>
+</div>
+

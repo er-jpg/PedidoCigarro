@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Gráfico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script>
+    window.onload = function () {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "dark1", "dark2"
+        exportEnabled: true,
+        title: {
+            text: "Corredores com a maior quantidade de pedidos"
+        },
+        data: [{
+            type: "column",
+            dataPoints:  @Html.Raw(ViewBag.Valores),
+        }]
+    });
+    chart.render();
+
+    }
+    </script>
+}
+<h2>Grafico</h2>
+<hr />
+
+<div class="container">
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            @Html.ActionLink("Novo Corredor", "Criar", "Corredor", new { @class = "btn btn-primary btn-lg btn-block" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Voltar", "Index", "Corredores", new { @class = "btn btn-secondary btn-lg btn-block" })
+        </div>
+    </div>
+</div>
