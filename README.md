@@ -6,6 +6,9 @@ Apenas copie ou faça o download do repositório, abra o arquivo de solução no
 
 Caso ocorram erros com o Entity Framework, tente abrir o Console do NuGet e rodar _Update-Database_.
 
+## Uso
+Como o login não tem a função de cookies, simplesmente aperte em qualquer link da navbar, o login padrão é `teste` e `123`, para adicionar novos logins é necessário ser feito por conexão com o Entity Framework.
+
 ## Ideias futuras
 *  Implementar o login como sendo completamente obrigatório para o uso do sistema, por meio de cookies e uma view de cadastro para novos usuários, onde apenas usuários logados podem fazer alterações no sistema e o resto apenas tem acesso a leitura dos dados
 * Adicionar personalidade ao site, da maneira que está não mostra nada de diferente e não se destaca de nenhum outro sistema
